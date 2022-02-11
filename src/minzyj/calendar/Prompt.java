@@ -11,10 +11,14 @@ public class Prompt {
 		Calendar cal = new Calendar();
 
 		int month = 0;
-
+		int year = 2017;
+		
 		while (true) {
+			System.out.println("년도를 입력하세요.");
+			System.out.print("YEAR> ");
+			year = scan.nextInt();
 			System.out.println("달을 입력하세요.");
-			System.out.print(PROMPT);
+			System.out.print("MONTH> ");
 			
 			month = scan.nextInt();
 			if (month == -1) {
@@ -23,7 +27,7 @@ public class Prompt {
 			if (month > 12) {
 				continue;
 			}
-			cal.printCalendar(2017, month);
+			cal.printCalendar(year, month);
 		}
 
 		System.out.println("BYE");
