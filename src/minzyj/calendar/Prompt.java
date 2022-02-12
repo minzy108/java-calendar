@@ -13,13 +13,13 @@ public class Prompt {
 		System.out.println("| h. 도움말 q. 종료 ");
 		System.out.println("+-------------------+ ");
 	}
+
 	/**
-	 * 1. switch case - String
-	 * 2. Plan class - refactoring
+	 * 1. switch case - String 2. Plan class - refactoring
 	 */
-	
+
 	public int parseDay(String week) {
-		switch(week) {
+		switch (week) {
 		case "SU":
 			return 0;
 		case "MO":
@@ -44,12 +44,12 @@ public class Prompt {
 
 		Scanner scan = new Scanner(System.in);
 		Calendar cal = new Calendar();
-		
+
 		boolean isLoop = true;
 		while (isLoop) {
 			System.out.println("명령 (1, 2, 3, h, q)");
 			String cmd = scan.next();
-			switch(cmd) {
+			switch (cmd) {
 			case "1":
 				cmdRegister(scan, cal);
 				break;
@@ -79,9 +79,13 @@ public class Prompt {
 		System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd)");
 		String date = scan.next();
 		String text = "";
-		scan.nextLine();
-		System.out.println("일정을 입력해 주세요.");
-		text = scan.nextLine();
+		System.out.println("일정을 입력해 주세요. (마지막에 ; 입력)");
+		String word;
+		while(!(word = scan.next()).endsWith(";")) {
+			text += word + " ";
+		}
+		word = word.replace(";", "");
+		text += word;
 		cal.registerPlan(date, text);
 	}
 
@@ -109,15 +113,14 @@ public class Prompt {
 		System.out.println("[일정 검색]");
 		System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd)");
 		String date = scan.next();
-		String plan = "";
-		try {
-			plan = cal.searchPlan(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			System.err.println("일정 검색 중 오류가 발생했습니다.");
+		PlanItem plan;
+		plan = cal.searchPlan(date);
+		if (plan != null) {
+			System.out.println(plan.detail);
+		} else {
+			System.out.println("일정이 없습니다.");			
 		}
-		System.out.println(plan);
-
+		
 	}
 
 	public static void main(String[] args) throws ParseException {
