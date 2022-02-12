@@ -13,25 +13,57 @@ public class Prompt {
 		System.out.println("| h. 도움말 q. 종료 ");
 		System.out.println("+-------------------+ ");
 	}
+	/**
+	 * 1. switch case - String
+	 * 2. Plan class - refactoring
+	 */
+	
+	public int parseDay(String week) {
+		switch(week) {
+		case "SU":
+			return 0;
+		case "MO":
+			return 1;
+		case "TU":
+			return 2;
+		case "WE":
+			return 3;
+		case "TH":
+			return 4;
+		case "FR":
+			return 5;
+		case "SA":
+			return 6;
+		default:
+			return 0;
+		}
+	}
 
 	public void runPrompt() throws ParseException {
 		printMenu();
 
 		Scanner scan = new Scanner(System.in);
 		Calendar cal = new Calendar();
-
-		while (true) {
+		
+		boolean isLoop = true;
+		while (isLoop) {
 			System.out.println("명령 (1, 2, 3, h, q)");
 			String cmd = scan.next();
-			if (cmd.equals("1")) {
+			switch(cmd) {
+			case "1":
 				cmdRegister(scan, cal);
-			} else if (cmd.equals("2")) {
+				break;
+			case "2":
 				cmdSearch(scan, cal);
-			} else if (cmd.equals("3")) {
+				break;
+			case "3":
 				cmdCal(scan, cal);
-			} else if (cmd.equals("h")) {
+				break;
+			case "h":
 				printMenu();
-			} else if (cmd.equals("q")) {
+				break;
+			case "q":
+				isLoop = false;
 				break;
 			}
 
